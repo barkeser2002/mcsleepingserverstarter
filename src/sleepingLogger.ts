@@ -48,13 +48,18 @@ export const getLogger = () => {
     _logger = createLogger({
       level: "info",
       format: format.combine(
+        format.errors({ stack: true }),
         format.timestamp({
           format: "YYYY-MM-DD HH:mm:ss",
         }),
         format.printf(
-          (info) =>
-            `${info.timestamp} ${info.level}: ${info.message}` +
-            (info.splat !== undefined ? `${info.splat}` : " ")
+          (info) => {
+            let log = `${info.timestamp} ${info.level}: ${info.message}`;
+            if (info.stack) {
+              log += `\n${info.stack}`;
+            }
+            return log + (info.splat !== undefined ? `${info.splat}` : " ");
+          }
         )
       ),
       transports: _transports,

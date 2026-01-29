@@ -176,7 +176,7 @@ Give a ⭐️ if you like the project!
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/vincss)
 
 ## 📜 ChangeLog
-- 1.11.10 - MC 1.21.11 / Bedrock 1.21.40 :
+- 1.11.11 - MC 1.21.11 / Bedrock 1.21.40 :
   - update minecraft-protocol-barkeser2002: 1.64.0
 - 1.11.4 - MC 1.21.x / Bedrock 1.21.40 : 
   - update minecraft-protocol: 1.57.0 

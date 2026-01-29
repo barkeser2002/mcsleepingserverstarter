@@ -38,7 +38,7 @@ process.on("uncaughtException", (err: Error) => {
     err.message !== "undefined"
     // && err.message.indexOf('handshaking.toServer')
   ) {
-    logger.error("[Main] Something bad happened", err.message);
+    logger.error("[Main] Something bad happened", err);
   }
 
   logger.info(

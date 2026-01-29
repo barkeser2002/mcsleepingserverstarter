@@ -1,6 +1,6 @@
 {
   "name": "mcsleepingserverstarter",
-  "version": "1.11.10",
+  "version": "1.11.11",
   "overrides": {
     "minecraft-data": "$minecraft-data"
   },
@@ -76,13 +76,10 @@
     "npm": ">=10"
   },
   "pkg": {
-    "scripts": [
-      "build/*.js",
-      "node_modules/confbox/dist/**/*.mjs"
-    ],
+    "scripts": "build/*.js",
     "assets": [
       "build/views/**/*",
-      "node_modules/confbox/dist/**/*"
+      "node_modules/confbox/**/*"
     ]
   }
 }
