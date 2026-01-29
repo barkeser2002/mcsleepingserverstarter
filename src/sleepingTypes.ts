@@ -1,4 +1,4 @@
-import { Client } from "minecraft-protocol";
+import { Client } from "minecraft-protocol-barkeser2002";
 
 export type PlayerConnectionCallBackType = (player: Player) => void;
 

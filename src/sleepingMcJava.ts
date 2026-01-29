@@ -1,4 +1,4 @@
-import { Client, createServer, Server, ServerClient } from "minecraft-protocol";
+import { Client, createServer, Server, ServerClient } from "minecraft-protocol-barkeser2002";
 import {
   getFavIcon,
   getMOTD,
