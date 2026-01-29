@@ -14,7 +14,7 @@
     "prebuild": "rimraf ./build/ ./bin/ && cpx-fixed \"views/**/*.*\" build/views",
     "build": "run-s build:typescript build:bin",
     "build:typescript": "tsc",
-    "build:bin": "pkg build/sleepingServerStarter.js --config package.json --compress GZip --target node22-win-x64,node22-linux-x64,node22-linux-arm64,node22-macos-x64,node22-macos-arm64,node22-alpine-arm64 --out-path ./bin/",
+    "build:bin": "pkg build/sleepingServerStarter.js --config package.json --compress GZip --no-bytecode --target node22-win-x64,node22-linux-x64,node22-linux-arm64,node22-macos-x64,node22-macos-arm64,node22-alpine-arm64 --out-path ./bin/",
     "lint": "eslint . --ext .ts --fix",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
   },
@@ -76,10 +76,14 @@
     "npm": ">=10"
   },
   "pkg": {
-    "scripts": "build/*.js",
+    "scripts": [
+      "build/*.js",
+      "node_modules/confbox/index.cjs"
+    ],
     "assets": [
       "build/views/**/*",
-      "node_modules/confbox/**/*"
+      "node_modules/confbox/package.json",
+      "node_modules/confbox/dist/**/*.mjs"
     ]
   }
 }
