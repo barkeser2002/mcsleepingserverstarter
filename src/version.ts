@@ -1,4 +1,4 @@
 /**
  * The current latest major minecraft version.
  */
-export const LATEST_MINECRAFT_VERSION = "1.21";
+export const LATEST_MINECRAFT_VERSION = "1.21.11";
