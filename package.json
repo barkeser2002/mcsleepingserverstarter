@@ -1,6 +1,6 @@
 {
   "name": "mcsleepingserverstarter",
-  "version": "1.11.11",
+  "version": "1.11.12",
   "overrides": {
     "minecraft-data": "$minecraft-data"
   },
@@ -27,7 +27,7 @@
     "express-handlebars": "^8.0.3",
     "js-yaml": "^4.1.0",
     "minecraft-data": "npm:minecraft-data-barkeser2002@^3.105.0",
-    "minecraft-protocol-barkeser2002": "^1.67.0",
+    "minecraft-protocol-barkeser2002": "^1.70.0",
     "prismarine-chat": "^1.12.0",
     "properties-reader": "^2.3.0",
     "winston": "^3.17.0"
