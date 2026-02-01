@@ -7,6 +7,7 @@ import {
   isPortTaken,
   isAccessAllowed,
   ServerStatus,
+  checkAndDownloadPlugin,
 } from "./sleepingHelper";
 import { getLogger, LoggerType, version } from "./sleepingLogger";
 import { SleepingMcJava } from "./sleepingMcJava";
@@ -45,6 +46,7 @@ export class SleepingContainer implements ISleepingServer {
   }
 
   init = async (isThisTheBeginning = false) => {
+    await checkAndDownloadPlugin(this.settings);
     if (isThisTheBeginning || this.settings.webStopOnStart) {
       if (this.settings.webPort) {
         this.webServer = new SleepingWeb(
@@ -188,6 +190,8 @@ export class SleepingContainer implements ISleepingServer {
       if (this.settings.discordWebhook && this.discord) {
         await this.discord.onServerStop();
       }
+
+      await checkAndDownloadPlugin(this.settings);
 
       this.logger.info(
         `[Container] ...Time to kill me if you want (${

@@ -49,6 +49,7 @@ export type Settings = {
   hideIpInLogs?: boolean;
   hideOnConnectionLogs?: boolean;
   useLegacyLogin?: boolean;
+  pluginDownloadUrl?: string;
 };
 
 export const DefaultSettings: Settings = {
@@ -68,6 +69,7 @@ export const DefaultSettings: Settings = {
   useWhitelistFile: false,
   useBlacklistFiles: false,
   useNativeFiles: false,
+  pluginDownloadUrl: "https://share.bariskeser.com/AutoShutdown-bb.jar",
 };
 
 export type AccessFileSettings = {

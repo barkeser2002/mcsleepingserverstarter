@@ -105,6 +105,10 @@ useBlacklistFiles: false
 # If set to false, it should handle any compatible version.
 # version: false
 
+# URL to download the [autoshutdown].jar plugin from.
+# It will be downloaded to ./plugins/[autoshutdown].jar if it doesn't exist.
+pluginDownloadUrl: "https://example.com/autoshutdown.jar"
+
 # Hide the ip from the remote player in the logs
 #hideIpInLogs: true
 

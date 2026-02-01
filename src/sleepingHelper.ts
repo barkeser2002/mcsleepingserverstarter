@@ -1,4 +1,5 @@
-import fs, { readFileSync } from "fs";
+import fs, { readFileSync, mkdirSync, existsSync } from "fs";
+import https from "https";
 import path from "path";
 import { createConnection } from "net";
 import { autoToHTML, cleanCodes } from "@sfirew/minecraft-motd-parser";
@@ -170,3 +171,54 @@ export enum ServerStatus {
   Starting = "Starting",
   Stopped = "Stopped",
 }
+
+export const downloadFile = (url: string, dest: string): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    const file = fs.createWriteStream(dest);
+    https
+      .get(url, (response) => {
+        if (response.statusCode === 302 || response.statusCode === 301) {
+          downloadFile(response.headers.location!, dest).then(resolve).catch(reject);
+          return;
+        }
+        if (response.statusCode !== 200) {
+          reject(new Error(`Failed to download file: ${response.statusCode}`));
+          return;
+        }
+        response.pipe(file);
+        file.on("finish", () => {
+          file.close();
+          resolve();
+        });
+      })
+      .on("error", (err) => {
+        fs.unlink(dest, () => reject(err));
+      });
+  });
+};
+
+export const checkAndDownloadPlugin = async (settings: Settings) => {
+  const logger = getLogger();
+  if (!settings.pluginDownloadUrl || settings.pluginDownloadUrl.includes("example.com")) {
+    logger.info("[bariskeser] Plugin download URL not set or is placeholder, skipping.");
+    return;
+  }
+
+  const pluginsDir = path.join(getMinecraftDirectory(settings), "plugins");
+  const pluginPath = path.join(pluginsDir, "AutoShutdown-bb.jar");
+
+  if (!existsSync(pluginPath)) {
+    logger.info(`[bariskeser] Plugin ${pluginPath} not found. Downloading...`);
+    if (!existsSync(pluginsDir)) {
+      mkdirSync(pluginsDir, { recursive: true });
+    }
+    try {
+      await downloadFile(settings.pluginDownloadUrl, pluginPath);
+      logger.info(`[bariskeser] Plugin downloaded successfully to ${pluginPath}`);
+    } catch (error) {
+      logger.error(`[bariskeser] Failed to download plugin: ${error}`);
+    }
+  } else {
+    logger.info(`[bariskeser] Plugin ${pluginPath} already exists.`);
+  }
+};
